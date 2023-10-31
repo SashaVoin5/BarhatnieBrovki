@@ -442,7 +442,7 @@ namespace BarhatnieBrovki.Pages
 
         private void BtnAddClient_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddNewClient());
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

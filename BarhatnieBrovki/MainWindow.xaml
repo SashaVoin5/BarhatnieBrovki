@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarhatnieBrovki"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Icon="C:\Users\sasha\source\repos\BarhatnieBrovki\BarhatnieBrovki\Resources\beauty_logo.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30*"/>

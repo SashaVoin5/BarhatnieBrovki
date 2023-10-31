@@ -23,7 +23,7 @@
             <ColumnDefinition Width="239*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <TextBox x:Name="Search" TextChanged="Search_TextChanged"/>
+            <TextBox x:Name="Search" TextChanged="Search_TextChanged" Height="22"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <ComboBox x:Name="ComboBoxSorting" SelectionChanged="ComboBoxSorting_SelectionChanged"/>
@@ -46,7 +46,7 @@
                                 <ColumnDefinition Width="229*"/>
                                 <ColumnDefinition Width="210*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel>
+                            <StackPanel Grid.Column="0" Margin="5">
                                 <TextBlock Text=""/>
                                 <TextBlock Text=""/>
                                 <TextBlock Text=""/>
@@ -55,14 +55,24 @@
 
                             </StackPanel>
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding LastName}"/>
-                                <TextBlock Text="{Binding FirstName}"/>
-                                <TextBlock Text="{Binding Patronymic}"/>
+                                <TextBlock Text="{Binding LastName, StringFormat='Фамилия: {0}'}"/>
+                                <TextBlock Text="{Binding FirstName, StringFormat='Имя: {0}'}"/>
+                                <TextBlock Text="{Binding Patronymic, StringFormat='Отчество: {0}'}"/>
                                 <TextBlock Text="{Binding Birthday, StringFormat='Дата рождения: {0}'}"/>
                                 <TextBlock Text="{Binding RegistrationDate, StringFormat='Дата регистрации: {0}'}"/>
                                 <TextBlock Text="{Binding Email, StringFormat='Электронная почта: {0}'}"/>
                                 <TextBlock Text="{Binding Phone, StringFormat='Номер телефона: {0}'}"/>
-                                <TextBlock Text="{Binding GenderOut}"/>
+                                <TextBlock Text="{Binding GenderOut, StringFormat='Пол: {0}'}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="3">
+                                <TextBlock Text=""/>
+                                <TextBlock Text=""/>
+                                <TextBlock Text=""/>
+                                <TextBlock Text="{Binding DataVisitint,StringFormat='Дата посещения: {0}'}"/>
+                                <TextBlock Text="{Binding CountVisitint,StringFormat='Дата посещения: {0}'}"/>
+
+
+
                             </StackPanel>
                         </Grid>
                     </Border>
