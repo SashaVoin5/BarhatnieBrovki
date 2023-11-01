@@ -3,10 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BarhatnieBrovki.Pages"
+      xmlns:local="clr-namespace:BarhatnieBrovki.Pages" xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientView">
+
+    <Page.Resources>
+        <sys:String x:Key="defaultImage">
+            pack://application:,,,/Resources/picture.png
+        </sys:String>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -47,10 +53,12 @@
                                 <ColumnDefinition Width="210*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5">
+                                
+                                <Image Height="100" Width="100" Source="{Binding ImgPath, FallbackValue={StaticResource defaultImage}}"/>
+
+                                
                                 <TextBlock Text=""/>
-                                <TextBlock Text=""/>
-                                <TextBlock Text=""/>
-                                <TextBlock Text="{Binding ID,StringFormat='ID Клиента: {0}'}"/>
+                               
 
 
                             </StackPanel>
@@ -67,7 +75,7 @@
                             <StackPanel Grid.Column="3">
                                 <TextBlock Text=""/>
                                 <TextBlock Text=""/>
-                                <TextBlock Text=""/>
+                                <TextBlock Text="{Binding ID,StringFormat='ID Клиента: {0}'}"/>
                                 <TextBlock Text="{Binding DataVisitint,StringFormat='Дата посещения: {0}'}"/>
                                 <TextBlock Text="{Binding CountVisitint,StringFormat='Дата посещения: {0}'}"/>
 

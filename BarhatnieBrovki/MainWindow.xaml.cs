@@ -29,7 +29,12 @@ namespace BarhatnieBrovki
 
         private void frame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-
+            try
+            {
+                ClientView pg = (ClientView)e.Content;
+                pg.Load();
+            }
+            catch { };
         }
     }
 }

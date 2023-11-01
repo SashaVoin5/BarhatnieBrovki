@@ -188,6 +188,42 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\122454.png" />
+    <Resource Include="Resources\96.png" />
+    <Resource Include="Resources\face.png" />
+    <Resource Include="Resources\makeup.jpg" />
+    <Resource Include="Resources\man.png" />
+    <Resource Include="Resources\mask.jpeg" />
+    <Resource Include="Resources\piling.jpg" />
+    <Resource Include="Resources\soliarij.jpg" />
+    <Resource Include="Resources\брови.png" />
+    <Resource Include="Resources\Гречишный массаж.jpg" />
+    <Resource Include="Resources\Декорирование нарощенных ресниц стразами.jpg" />
+    <Resource Include="Resources\Демакияж.jpg" />
+    <Resource Include="Resources\Депиляция воском.jpg" />
+    <Resource Include="Resources\Европейский маникюр.jpg" />
+    <Resource Include="Resources\ИК-сауна.jpg" />
+    <Resource Include="Resources\Классический маникюр.png" />
+    <Resource Include="Resources\Комбинированный маникюр.jpg" />
+    <Resource Include="Resources\Контурная пластика.jpg" />
+    <Resource Include="Resources\массаж.jpg" />
+    <Resource Include="Resources\Мезотерапия.jpg" />
+    <Resource Include="Resources\Моделирование ресниц.jpg" />
+    <Resource Include="Resources\ногти.png" />
+    <Resource Include="Resources\Окрашивание бровей.jpg" />
+    <Resource Include="Resources\Парафинотерапия.jpg" />
+    <Resource Include="Resources\Покрытие ногтей гель-лаком.jpg" />
+    <Resource Include="Resources\Полировка ногтей.jpg" />
+    <Resource Include="Resources\Прессотерапия.jpg" />
+    <Resource Include="Resources\Прокол ушей пистолетом.png" />
+    <Resource Include="Resources\Ресницы.png" />
+    <Resource Include="Resources\Снятие ресниц.jpg" />
+    <Resource Include="Resources\Стоун-терапия.jpg" />
+    <Resource Include="Resources\стрижка.png" />
+    <Resource Include="Resources\Укрепление ногтей гелем.jpg" />
+    <Resource Include="Resources\Шугаринг.jpg" />
+    <Resource Include="Resources\Экспресс SPA.png" />
+    <Resource Include="Resources\Экспресс-педикюр.jpg" />
     <Resource Include="Resources\beauty_logo.png" />
   </ItemGroup>
   <ItemGroup>

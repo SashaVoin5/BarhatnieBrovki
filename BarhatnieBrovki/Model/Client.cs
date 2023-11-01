@@ -11,7 +11,8 @@ namespace BarhatnieBrovki.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -50,6 +51,24 @@ namespace BarhatnieBrovki.Model
                 {
                     return "Женщина";
                 }
+            }
+        }
+        public System.DateTime DataVisitint
+        {
+            get
+            {
+                return BarhatnieBrovkiEntities.GetContext().ClientService
+                    .Where(cs => cs.ClientID == this.ID)
+                    .OrderByDescending(c => c.StartTime)
+                    .Select(c => c.StartTime).FirstOrDefault();
+            }
+        }
+
+        public string CountVisitint
+        {
+            get
+            {
+                return this.ClientService.Count().ToString();
             }
         }
     }
