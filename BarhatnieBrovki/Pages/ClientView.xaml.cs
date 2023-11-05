@@ -565,7 +565,19 @@ namespace BarhatnieBrovki.Pages
 
         private void BtnEditClient_Click(object sender, RoutedEventArgs e)
         {
+            if (DataView.SelectedItems.Count > 0)
+            {
+                Client client = DataView.SelectedItem as Client;
 
+                if (client != null)
+                {
+                    NavigationService.Navigate(new EditClient(client));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите клиента для редактирования", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnAddClient_Click(object sender, RoutedEventArgs e)

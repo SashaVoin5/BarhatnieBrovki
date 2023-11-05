@@ -8,11 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientView">
 
-    <Page.Resources>
-        <sys:String x:Key="defaultImage">
-            pack://application:,,,/Resources/picture.png
-        </sys:String>
-    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -57,7 +52,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5">
                                 
-                                <Image Height="100" Width="100" Source="{Binding ImgPath, FallbackValue={StaticResource defaultImage}}"/>
+                                <Image Height="100" Width="100" Source="{Binding ImgPath, FallbackValue={}}"/>
 
                                 
                                 <TextBlock Text=""/>

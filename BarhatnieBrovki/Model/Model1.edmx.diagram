@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4e506313b1bf4b6693769100b82f3639" Name="Diagram1">
+      <Diagram DiagramId="6063d95fb0a342c5af84a569e960ffdf" Name="Diagram1">
         <EntityTypeShape EntityType="barhatnie_brovkiModel.Client" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="barhatnie_brovkiModel.ClientService" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="barhatnie_brovkiModel.DocumentByService" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
@@ -14,11 +14,13 @@
         <EntityTypeShape EntityType="barhatnie_brovkiModel.ProductPhoto" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="barhatnie_brovkiModel.ProductSale" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="barhatnie_brovkiModel.Service" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="barhatnie_brovkiModel.ServicePhoto" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="barhatnie_brovkiModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="barhatnie_brovkiModel.Tag" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="barhatnie_brovkiModel.ServicePhoto" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="barhatnie_brovkiModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="barhatnie_brovkiModel.Tag" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="barhatnie_brovkiModel.TagOfClient" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_Client_Gender" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_ClientService_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="barhatnie_brovkiModel.FK_TagOfClient_Client" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_ClientService_Service" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_DocumentByService_ClientService" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_ProductSale_ClientService" ManuallyRouted="false" />
@@ -26,8 +28,8 @@
         <AssociationConnector Association="barhatnie_brovkiModel.FK_ProductPhoto_Product" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_ProductSale_Product" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.FK_ServicePhoto_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="barhatnie_brovkiModel.FK_TagOfClient_Tag" ManuallyRouted="false" />
         <AssociationConnector Association="barhatnie_brovkiModel.AttachedProduct" ManuallyRouted="false" />
-        <AssociationConnector Association="barhatnie_brovkiModel.TagOfClient" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

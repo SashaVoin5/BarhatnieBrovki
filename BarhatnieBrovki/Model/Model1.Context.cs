@@ -22,7 +22,7 @@ namespace BarhatnieBrovki.Model
         }
         public static BarhatnieBrovkiEntities GetContext()
         {
-            if(context==null)
+            if (context ==  null)
             {
                 context = new BarhatnieBrovkiEntities();
             }
@@ -46,5 +46,6 @@ namespace BarhatnieBrovki.Model
         public virtual DbSet<ServicePhoto> ServicePhoto { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
+        public virtual DbSet<TagOfClient> TagOfClient { get; set; }
     }
 }

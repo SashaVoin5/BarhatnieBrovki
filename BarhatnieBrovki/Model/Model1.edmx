@@ -131,9 +131,9 @@
         </EntityType>
         <EntityType Name="TagOfClient">
           <Key>
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="TagID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="TagID" Type="int" Nullable="false" />
         </EntityType>
@@ -382,7 +382,7 @@
           <Property Name="PhotoPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
           <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Client" FromRole="Client" ToRole="ClientService" />
-          <NavigationProperty Name="Tag" Relationship="Self.TagOfClient" FromRole="Client" ToRole="Tag" />
+          <NavigationProperty Name="TagOfClient" Relationship="Self.FK_TagOfClient_Client" FromRole="Client" ToRole="TagOfClient" />
         </EntityType>
         <EntityType Name="ClientService">
           <Key>
@@ -502,7 +502,17 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.TagOfClient" FromRole="Tag" ToRole="Client" />
+          <NavigationProperty Name="TagOfClient" Relationship="Self.FK_TagOfClient_Tag" FromRole="Tag" ToRole="TagOfClient" />
+        </EntityType>
+        <EntityType Name="TagOfClient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="TagID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_TagOfClient_Client" FromRole="TagOfClient" ToRole="Client" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_TagOfClient_Tag" FromRole="TagOfClient" ToRole="Tag" />
         </EntityType>
         <Association Name="FK_Client_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
@@ -524,6 +534,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ClientService">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagOfClient_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="TagOfClient" Type="Self.TagOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TagOfClient">
               <PropertyRef Name="ClientID" />
             </Dependent>
           </ReferentialConstraint>
@@ -612,13 +634,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TagOfClient_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TagOfClient" Type="Self.TagOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TagOfClient">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AttachedProduct">
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <End Role="Product1" Type="Self.Product" Multiplicity="*" />
-        </Association>
-        <Association Name="TagOfClient">
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
         </Association>
         <EntityContainer Name="BarhatnieBrovkiEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
@@ -633,6 +663,7 @@
           <EntitySet Name="ServicePhoto" EntityType="Self.ServicePhoto" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="TagOfClient" EntityType="Self.TagOfClient" />
           <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Client" EntitySet="Client" />
@@ -640,6 +671,10 @@
           <AssociationSet Name="FK_ClientService_Client" Association="Self.FK_ClientService_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientService" EntitySet="ClientService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagOfClient_Client" Association="Self.FK_TagOfClient_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="TagOfClient" EntitySet="TagOfClient" />
           </AssociationSet>
           <AssociationSet Name="FK_ClientService_Service" Association="Self.FK_ClientService_Service">
             <End Role="Service" EntitySet="Service" />
@@ -669,13 +704,13 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="ServicePhoto" EntitySet="ServicePhoto" />
           </AssociationSet>
+          <AssociationSet Name="FK_TagOfClient_Tag" Association="Self.FK_TagOfClient_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TagOfClient" EntitySet="TagOfClient" />
+          </AssociationSet>
           <AssociationSet Name="AttachedProduct" Association="Self.AttachedProduct">
             <End Role="Product" EntitySet="Product" />
             <End Role="Product1" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="TagOfClient" Association="Self.TagOfClient">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Tag" EntitySet="Tag" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -812,20 +847,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TagOfClient">
+            <EntityTypeMapping TypeName="barhatnie_brovkiModel.TagOfClient">
+              <MappingFragment StoreEntitySet="TagOfClient">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="AttachedProduct" TypeName="barhatnie_brovkiModel.AttachedProduct" StoreEntitySet="AttachedProduct">
             <EndProperty Name="Product">
               <ScalarProperty Name="ID" ColumnName="MainProductID" />
             </EndProperty>
             <EndProperty Name="Product1">
               <ScalarProperty Name="ID" ColumnName="AttachedProductID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="TagOfClient" TypeName="barhatnie_brovkiModel.TagOfClient" StoreEntitySet="TagOfClient">
-            <EndProperty Name="Client">
-              <ScalarProperty Name="ID" ColumnName="ClientID" />
-            </EndProperty>
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="ID" ColumnName="TagID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
