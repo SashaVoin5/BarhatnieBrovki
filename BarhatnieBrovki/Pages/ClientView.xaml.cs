@@ -560,7 +560,45 @@ namespace BarhatnieBrovki.Pages
 
         private void BtnDeleteClient_Click(object sender, RoutedEventArgs e)
         {
+            if (DataView.SelectedIndex == -1)
+            {
+                MessageBox.Show("Выделите строку для удаления", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            if ((DataView.SelectedIndex != -1))
+            {
+                try
+                {
+                    if (MessageBox.Show("Вы точно хотите удалить эту запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
 
+                        var idi = (DataView.SelectedItem as Client).ID;
+                        var CountService = BarhatnieBrovkiEntities.GetContext().ClientService.Where(Client => Client.ClientID == idi).Count();
+                        if (CountService > 0)
+                        {
+                            MessageBox.Show("Удаление невозможно, у агента есть информация о посещении ", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        else
+                        {
+                            var TagDelete = BarhatnieBrovkiEntities.GetContext().TagOfClient.Where(p => p.ClientID == idi);
+                            var ClientDelete = BarhatnieBrovkiEntities.GetContext().Client.Where(p => p.ID == idi).FirstOrDefault();
+                            foreach (var item in TagDelete)
+                            {
+                                BarhatnieBrovkiEntities.GetContext().TagOfClient.Remove(item);
+                            }
+
+                            BarhatnieBrovkiEntities.GetContext().Client.Remove(ClientDelete);
+                            BarhatnieBrovkiEntities.GetContext().SaveChanges();
+                            MessageBox.Show("Клиент удален", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Load();
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void BtnEditClient_Click(object sender, RoutedEventArgs e)
