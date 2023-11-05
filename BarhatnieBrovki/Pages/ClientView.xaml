@@ -28,14 +28,17 @@
             <ColumnDefinition Width="210*"/>
             <ColumnDefinition Width="239*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="1" Grid.Column="0">
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="1">
             <TextBox x:Name="Search" TextChanged="Search_TextChanged" Height="22"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="1">
             <ComboBox x:Name="ComboBoxSorting" SelectionChanged="ComboBoxSorting_SelectionChanged"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="2">
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="1">
             <ComboBox x:Name="ComboBoxFilter" SelectionChanged="ComboBoxFilter_SelectionChanged"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3" Margin="5">
+            <CheckBox x:Name="Birthday" Content="Рождение в этом месяце" Checked="check_birthday" Unchecked="Birthday_Unchecked"/>
         </StackPanel>
         <ListView x:Name="DataView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" d:ItemsSource="{d:SampleData ItemCount=3}">
             <ListView.ItemContainerStyle>
@@ -77,7 +80,7 @@
                                 <TextBlock Text=""/>
                                 <TextBlock Text="{Binding ID,StringFormat='ID Клиента: {0}'}"/>
                                 <TextBlock Text="{Binding DataVisitint,StringFormat='Дата посещения: {0}'}"/>
-                                <TextBlock Text="{Binding CountVisitint,StringFormat='Дата посещения: {0}'}"/>
+                                <TextBlock Text="{Binding CountVisitint,StringFormat='Кол-во посещений: {0}'}"/>
 
 
 

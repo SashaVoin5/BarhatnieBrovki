@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -24,8 +25,10 @@ namespace BarhatnieBrovki.Pages
     public partial class ClientView : Page
     {
         public int fullcount = 0;
+        public int IndexFilter = 0;
         public int start = 0;
         int ViewPages = 10;
+        public string SearchText = "";
         public ClientView(Frame frame)
         {
             InitializeComponent();
@@ -90,7 +93,7 @@ namespace BarhatnieBrovki.Pages
             }
             if (ComboBoxSorting.SelectedIndex == 1)
             {
-                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(p => p.ID).ToList();
+                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(p => p.LastName).ToList();
                 if (ViewPages == 10)
                 {
                     DataView.ItemsSource = Data.Skip(start * 10).Take(10);
@@ -118,7 +121,7 @@ namespace BarhatnieBrovki.Pages
             }
             if (ComboBoxSorting.SelectedIndex == 2)
             {
-                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(p => p.ID).ToList();
+                var Data = BarhatnieBrovkiEntities.GetContext().Client.ToList().OrderByDescending(c => c.DataVisitint).ToList(); 
                 if (ViewPages == 10)
                 {
                     DataView.ItemsSource = Data.Skip(start * 10).Take(10);
@@ -146,7 +149,7 @@ namespace BarhatnieBrovki.Pages
             }
             if (ComboBoxSorting.SelectedIndex == 3)
             {
-                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(p => p.ID).ToList();
+                var Data = BarhatnieBrovkiEntities.GetContext().Client.ToList().OrderBy(c => c.DataVisitint).ToList();
                 if (ViewPages == 10)
                 {
                     DataView.ItemsSource = Data.Skip(start * 10).Take(10);
@@ -174,7 +177,7 @@ namespace BarhatnieBrovki.Pages
             }
             if (ComboBoxSorting.SelectedIndex == 4)
             {
-                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(p => p.ID).ToList();
+                var Data = BarhatnieBrovkiEntities.GetContext().Client.ToList().OrderByDescending(c => c.CountVisitint).ToList();
                 if (ViewPages == 10)
                 {
                     DataView.ItemsSource = Data.Skip(start * 10).Take(10);
@@ -202,7 +205,7 @@ namespace BarhatnieBrovki.Pages
             }
             if (ComboBoxSorting.SelectedIndex == 5)
             {
-                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(p => p.ID).ToList();
+                var Data = BarhatnieBrovkiEntities.GetContext().Client.ToList().OrderBy(c => c.CountVisitint).ToList();
                 if (ViewPages == 10)
                 {
                     DataView.ItemsSource = Data.Skip(start * 10).Take(10);
@@ -228,6 +231,129 @@ namespace BarhatnieBrovki.Pages
                     LoadAll();
                 }
             }
+
+            if (IndexFilter != 0)
+            {
+                string filter = IndexFilter.ToString();
+                var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(Client => Client.ID).Where(p => p.GenderCode == filter).ToList();
+                if (ViewPages == 10)
+                {
+                    DataView.ItemsSource = Data.Skip(start * 10).Take(10);
+                    fullcount = Data.Count();
+                    Load10();
+                }
+                if (ViewPages == 50)
+                {
+                    DataView.ItemsSource = Data.Skip(start * 50).Take(50);
+                    fullcount = Data.Count();
+                    Load50();
+                }
+                if (ViewPages == 200)
+                {
+                    DataView.ItemsSource = Data.Skip(start * 200).Take(200);
+                    fullcount = Data.Count();
+                    Load200();
+                }
+                if (ViewPages == 555)
+                {
+                    DataView.ItemsSource = Data;
+                    fullcount = Data.Count();
+                    LoadAll();
+                }
+            }
+
+            if (SearchText != "")
+            {
+                if (IndexFilter != 0)
+                {
+                    string filter = IndexFilter.ToString();
+                    var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(Client => Client.ID).Where(Client => Client.LastName.Contains(SearchText) && Client.GenderCode == filter || Client.Phone.Contains(SearchText) && Client.GenderCode == filter || Client.FirstName.Contains(SearchText) && Client.GenderCode == filter || Client.Patronymic.Contains(SearchText) && Client.GenderCode == filter || Client.Email.Contains(SearchText) && Client.GenderCode == filter).ToList();
+                    if (ViewPages == 10)
+                    {
+                        DataView.ItemsSource = Data.Skip(start * 10).Take(10);
+                        fullcount = Data.Count();
+                        Load10();
+                    }
+                    if (ViewPages == 50)
+                    {
+                        DataView.ItemsSource = Data.Skip(start * 50).Take(50);
+                        fullcount = Data.Count();
+                        Load50();
+                    }
+                    if (ViewPages == 200)
+                    {
+                        DataView.ItemsSource = Data.Skip(start * 200).Take(200);
+                        fullcount = Data.Count();
+                        Load200();
+                    }
+                    if (ViewPages == 555)
+                    {
+                        DataView.ItemsSource = Data;
+                        fullcount = Data.Count();
+                        LoadAll();
+                    }
+
+                }
+                else
+                {
+                    var Data = BarhatnieBrovkiEntities.GetContext().Client.OrderBy(Client => Client.ID).Where(Client => Client.LastName.Contains(SearchText) || Client.Phone.Contains(SearchText) || Client.FirstName.Contains(SearchText) || Client.Patronymic.Contains(SearchText) || Client.Email.Contains(SearchText)).ToList();
+                    if (ViewPages == 10)
+                    {
+                        DataView.ItemsSource = Data.Skip(start * 10).Take(10);
+                        fullcount = Data.Count();
+                        Load10();
+                    }
+                    if (ViewPages == 50)
+                    {
+                        DataView.ItemsSource = Data.Skip(start * 50).Take(50);
+                        fullcount = Data.Count();
+                        Load50();
+                    }
+                    if (ViewPages == 200)
+                    {
+                        DataView.ItemsSource = Data.Skip(start * 200).Take(200);
+                        fullcount = Data.Count();
+                        Load200();
+                    }
+                    if (ViewPages == 555)
+                    {
+                        DataView.ItemsSource = Data;
+                        fullcount = Data.Count();
+                        LoadAll();
+                    }
+                }
+            }
+
+            if (Birthday.IsChecked == true)
+            {
+                int seeCount = 0;
+                var serach = BarhatnieBrovkiEntities.GetContext().Client.Where(c => c.Birthday.HasValue && c.Birthday.Value.Month == DateTime.Now.Month).ToList();
+                DataView.ItemsSource = serach;
+                var countData = serach.Count();
+                fullcount = countData;
+                int ost = countData % 10;
+                int pag = 0;
+                pag = (countData - ost) / 200;
+                if (ost > 0) pag++;
+                pagin.Children.Clear();
+                for (int i = 0; i < pag; i++)
+                {
+                    Button myButton = new Button();
+                    myButton.Height = 30;
+                    myButton.Content = i + 1;
+                    myButton.Width = 20;
+                    myButton.HorizontalAlignment = HorizontalAlignment.Center;
+                    myButton.Tag = i;
+                    myButton.Click += new RoutedEventHandler(pagButton_Click);
+                    pagin.Children.Add(myButton);
+                }
+                turnButton50();
+               
+
+                CountItem.Text = "Показано " + fullcount.ToString() + " записей  " ;
+
+            }
+
 
         }
         public void LoadAll()
@@ -417,17 +543,19 @@ namespace BarhatnieBrovki.Pages
         }
         private void Search_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            SearchText = Search.Text.ToString();
+            Load();
         }
 
         private void ComboBoxSorting_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Load();
         }
 
         private void ComboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            IndexFilter = ComboBoxFilter.SelectedIndex;
+            Load();
         }
 
         private void BtnDeleteClient_Click(object sender, RoutedEventArgs e)
@@ -478,6 +606,16 @@ namespace BarhatnieBrovki.Pages
         private void AllItems_Click(object sender, RoutedEventArgs e)
         {
             ViewPages = 555;
+            Load();
+        }
+
+        private void check_birthday(object sender, RoutedEventArgs e)
+        {
+            Load();
+        }
+
+        private void Birthday_Unchecked(object sender, RoutedEventArgs e)
+        {
             Load();
         }
     }
