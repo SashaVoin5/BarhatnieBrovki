@@ -668,5 +668,23 @@ namespace BarhatnieBrovki.Pages
         {
             Load();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataView.SelectedItems.Count > 0)
+            {
+                Client client = DataView.SelectedItem as Client;
+
+                if (client != null)
+                {
+                    serviceview newview = new serviceview(client);
+                    newview.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите клиента для просмотра посещений", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

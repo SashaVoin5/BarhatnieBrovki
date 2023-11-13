@@ -11,7 +11,8 @@ namespace BarhatnieBrovki.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class ClientService
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,5 +34,50 @@ namespace BarhatnieBrovki.Model
         public virtual ICollection<DocumentByService> DocumentByService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSale { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+                return ServiceName.Title;
+            }
+        }
+
+        public string Sum
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+               
+                if (Discount != 0)
+                Decimal ServiceCost = Convert.ToDecimal(ServiceName.Cost);
+                int ServiceIntCost = Convert.ToInt32(ServiceCost);
+                return Convert.ToString(ServiceIntCost) + " рублей за ";            
+              
+                   
+                
+
+            }
+               
+        }
+
+        public string Time
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+
+
+                Decimal ServiceTime = Convert.ToDecimal(ServiceName.DurationInSeconds);
+                Decimal ServiceIntCost = ServiceTime / 60;
+                return Convert.ToString(ServiceIntCost) + " минут";
+
+
+
+
+            }
+
+        }
     }
 }
