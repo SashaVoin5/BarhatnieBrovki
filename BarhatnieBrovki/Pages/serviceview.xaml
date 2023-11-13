@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarhatnieBrovki.Pages"
         mc:Ignorable="d"
-        Title="serviceview" Height="450" Width="800">
+        Title="Посещения клиентов" Height="450" Width="800">
     <Grid>
         
             <Grid.ColumnDefinitions>
@@ -55,11 +55,12 @@
                             <StackPanel Grid.Column="1" Margin="5" >
                                 <TextBlock Text="{Binding Name}"/>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Sum}"/>
+                                    <TextBlock Text="{Binding Sum}" TextDecorations="{Binding Decorate}"/>
+                                    <TextBlock Text="{Binding NewSum}"/>
                                     <TextBlock Text="{Binding Time}"/>
                                 </StackPanel>
                                
-                                <TextBlock Text="{Binding Discount, StringFormat='* скидка {0}'}"/>
+                                <TextBlock Text="{Binding Discount}"/>
                                 <TextBlock Text=""/>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Редактировать" Margin="5" Name="EditService" Click="EditService_Click" Background="{x:Null}"/>

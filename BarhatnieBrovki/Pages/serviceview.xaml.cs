@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,13 +21,14 @@ namespace BarhatnieBrovki.Pages
     /// </summary>
     public partial class serviceview : Window
     {
-        
-        public serviceview(Client client)
+        Client client;
+        public serviceview(Client cl)
         {
             InitializeComponent();
+            client = cl;
             try
             {
-                DataView.ItemsSource = BarhatnieBrovkiEntities.GetContext().ClientService.Where(Client => Client.ClientID == client.ID).ToList();
+                Load();
                 if (client.PhotoPath != null)
                 {
                     string imagePath = "C:\\Users\\sasha\\source\\repos\\Rul2\\Rul2\\Resources\\" + client.PhotoPath.Trim();
@@ -59,15 +61,34 @@ namespace BarhatnieBrovki.Pages
             
            
         }
+        public void Load()
+        {
+            DataView.ItemsSource = BarhatnieBrovkiEntities.GetContext().ClientService.Where(Client => Client.ClientID == client.ID).ToList();
+        }
 
         private void DeleteService_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы точно хотите удалить эту услугу!", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            if (DataView.SelectedItem != null)
             {
-                var SelectedService = DataView.SelectedItem as ClientService;
-                BarhatnieBrovkiEntities.GetContext().ClientService.Remove(SelectedService);
-                BarhatnieBrovkiEntities.GetContext().SaveChanges();
+                try
+                {
+                    if (MessageBox.Show("Вы точно хотите удалить эту услугу!", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        var SelectedService = DataView.SelectedItem as ClientService;
+                        BarhatnieBrovkiEntities.GetContext().ClientService.Remove(SelectedService);
+                        BarhatnieBrovkiEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Успешно!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Load();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Неизсветная ошибка!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                
+               
             }
+            
             else
             {
                 MessageBox.Show("Выделите услугу и нажмите на кнопку!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);

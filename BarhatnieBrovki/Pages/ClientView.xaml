@@ -74,7 +74,7 @@
                                 <TextBlock Text=""/>
                                 <TextBlock Text=""/>
                                 <TextBlock Text="{Binding ID,StringFormat='ID Клиента: {0}'}"/>
-                                <TextBlock Text="{Binding DataVisitint,StringFormat='Дата посещения: {0}'}"/>
+                                <TextBlock Text="{Binding DataVisitint,StringFormat='Дата посещения: {0}'}" Visibility="{Binding Visibl}"/>
                                 <TextBlock Text="{Binding CountVisitint,StringFormat='Кол-во посещений: {0}'}"/>
 
 

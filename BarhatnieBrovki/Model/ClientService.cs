@@ -49,17 +49,85 @@ namespace BarhatnieBrovki.Model
             get
             {
                 var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
-               
-                if (Discount != 0)
-                Decimal ServiceCost = Convert.ToDecimal(ServiceName.Cost);
-                int ServiceIntCost = Convert.ToInt32(ServiceCost);
-                return Convert.ToString(ServiceIntCost) + " рублей за ";            
-              
-                   
-                
+
+                if (ServiceName.Discount == 0)
+                {
+                    Decimal ServiceCost = Convert.ToDecimal(ServiceName.Cost);
+                    int ServiceIntCost = Convert.ToInt32(ServiceCost);
+                    return Convert.ToString(ServiceIntCost) + " рублей за ";
+                }
+                else
+                {
+                    Decimal ServiceCost = Convert.ToDecimal(ServiceName.Cost);
+                    int ServiceIntCost = Convert.ToInt32(ServiceCost);
+                    return Convert.ToString(ServiceCost) + " ";
+                }
+                    
+
+
+
 
             }
-               
+
+         }
+        public string NewSum
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+
+                if (ServiceName.Discount != 0)
+                {
+                    Decimal ServiceCost = Convert.ToDecimal(ServiceName.Cost);
+                    Decimal ServiceDiscount = Convert.ToDecimal(ServiceName.Discount);
+                    Decimal ServiceDiscountPer = ServiceDiscount * 100;
+
+
+                    Decimal ServiceNewCost = (ServiceCost * ServiceDiscountPer) / 100;
+                    Decimal ServiceFinalCost = ServiceCost - ServiceNewCost;
+
+                    int ServiceIntCost = Convert.ToInt32(ServiceFinalCost);
+                    return Convert.ToString(ServiceIntCost) + " рублей за ";
+                }
+                else
+                {
+                  
+                    return " ";
+                }
+
+
+
+
+
+            }
+
+
+
+        }
+
+        public string Decorate
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+
+                if (ServiceName.Discount == 0)
+                {
+                    return "";
+                }
+                else
+                {
+                  
+                    return "Strikethrough";
+                }
+
+
+
+
+
+            }
+
+
         }
 
         public string Time
@@ -72,6 +140,30 @@ namespace BarhatnieBrovki.Model
                 Decimal ServiceTime = Convert.ToDecimal(ServiceName.DurationInSeconds);
                 Decimal ServiceIntCost = ServiceTime / 60;
                 return Convert.ToString(ServiceIntCost) + " минут";
+
+
+
+
+            }
+
+        }
+
+        public string Discount
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+
+
+                if (ServiceName.Discount !=0)
+                {
+                    return "* скидка " + Convert.ToString(ServiceName.Discount * 100) + "%";
+                }
+                else
+                {
+                    return "";
+                }
+                
 
 
 

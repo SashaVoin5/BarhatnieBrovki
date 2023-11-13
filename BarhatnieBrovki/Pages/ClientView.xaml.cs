@@ -679,6 +679,7 @@ namespace BarhatnieBrovki.Pages
                 {
                     serviceview newview = new serviceview(client);
                     newview.ShowDialog();
+                    Load();
                 }
             }
             else

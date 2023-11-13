@@ -57,10 +57,27 @@ namespace BarhatnieBrovki.Model
         {
             get
             {
+               
                 return BarhatnieBrovkiEntities.GetContext().ClientService
                     .Where(cs => cs.ClientID == this.ID)
                     .OrderByDescending(c => c.StartTime)
                     .Select(c => c.StartTime).FirstOrDefault();
+            }
+        }
+
+        public string Visibl
+        {
+            get
+            {
+                if (this.ClientService.Count() == 0)
+                {
+                    return "Hidden";
+                }
+                else
+                {
+                    return "Visible";
+                }
+               
             }
         }
 
