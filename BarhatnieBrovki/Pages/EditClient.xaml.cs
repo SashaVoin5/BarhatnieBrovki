@@ -57,7 +57,7 @@ namespace BarhatnieBrovki.Pages
             {
                 Gender.Text = item.Name;
             }
-            if (cl.PhotoPath != null)
+            if (cl.PhotoPath != "")
             {
                 string imagePath = "C:\\Users\\sasha\\source\\repos\\BarhatnieBrovki\\BarhatnieBrovki\\Resources\\" + cl.PhotoPath.Trim();
                 BitmapImage bitmapImage = new BitmapImage();

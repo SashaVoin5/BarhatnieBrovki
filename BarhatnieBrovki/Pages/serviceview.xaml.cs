@@ -29,9 +29,9 @@ namespace BarhatnieBrovki.Pages
             try
             {
                 Load();
-                if (client.PhotoPath != null)
+                if (client.PhotoPath != "")
                 {
-                    string imagePath = "C:\\Users\\sasha\\source\\repos\\Rul2\\Rul2\\Resources\\" + client.PhotoPath.Trim();
+                    string imagePath = "C:\\Users\\sasha\\source\\repos\\BarhatnieBrovki\\BarhatnieBrovki\\Resources\\" + client.PhotoPath.Trim();
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
                     bitmapImage.UriSource = new Uri(imagePath);
@@ -43,7 +43,7 @@ namespace BarhatnieBrovki.Pages
                 }
                 FirstName.Text = "Имя " + client.FirstName;
                 LastName.Text = "Фамилия " + client.LastName;
-                if (client.Patronymic != null)
+                if (client.Patronymic != "" || (client.Patronymic !=null))
                 {
                     MiddleName.Text = "Отчество " + client.Patronymic;
                 }
@@ -52,7 +52,7 @@ namespace BarhatnieBrovki.Pages
                     MiddleName.Text = "Отчество отсутствует";
                 }
                 
-                CountVisit.Text = "Кол-во посещений " + BarhatnieBrovkiEntities.GetContext().ClientService.Where(Client => Client.ClientID == client.ID).Count().ToString();
+               
             }
             catch
             {
@@ -64,6 +64,7 @@ namespace BarhatnieBrovki.Pages
         public void Load()
         {
             DataView.ItemsSource = BarhatnieBrovkiEntities.GetContext().ClientService.Where(Client => Client.ClientID == client.ID).ToList();
+            CountVisit.Text = "Кол-во посещений " + BarhatnieBrovkiEntities.GetContext().ClientService.Where(Client => Client.ClientID == client.ID).Count().ToString();
         }
 
         private void DeleteService_Click(object sender, RoutedEventArgs e)
@@ -97,7 +98,7 @@ namespace BarhatnieBrovki.Pages
 
         private void EditService_Click(object sender, RoutedEventArgs e)
         {
-
+            Load();
         }
     }
 }

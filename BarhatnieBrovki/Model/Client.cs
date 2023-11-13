@@ -53,6 +53,19 @@ namespace BarhatnieBrovki.Model
                 }
             }
         }
+
+        public string ImgPath
+        {
+            get
+            {
+                if (this.PhotoPath != "")
+                {
+                    return "\\Resources\\" + this.PhotoPath;
+                }
+                else return "";
+                
+            }
+        }
         public System.DateTime DataVisitint
         {
             get

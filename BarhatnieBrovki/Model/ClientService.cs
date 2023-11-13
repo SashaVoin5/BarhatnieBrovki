@@ -171,5 +171,23 @@ namespace BarhatnieBrovki.Model
             }
 
         }
+
+        public string ImgPath
+        {
+            get
+            {
+                var ServiceName = BarhatnieBrovkiEntities.GetContext().Service.Where(p => p.ID == this.ServiceID).FirstOrDefault();
+
+
+
+                return "\\Resources\\" +ServiceName.MainImagePath;
+
+
+
+
+
+            }
+
+        }
     }
 }
