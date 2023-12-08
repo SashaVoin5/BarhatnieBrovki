@@ -29,7 +29,7 @@ namespace BarhatnieBrovki.Pages
             try
             {
                 Load();
-                if (client.PhotoPath != "")
+                if (client.PhotoPath != null)
                 {
                     string imagePath = "C:\\Users\\sasha\\source\\repos\\BarhatnieBrovki\\BarhatnieBrovki\\Resources\\" + client.PhotoPath.Trim();
                     BitmapImage bitmapImage = new BitmapImage();
